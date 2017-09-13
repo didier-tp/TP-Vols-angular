@@ -11,31 +11,30 @@ import org.springframework.transaction.annotation.Transactional;
 
 import vol.metier.dao.VilleAeroportDao;
 import vol.metier.model.VilleAeroport;
+import vol.metier.model.VilleAeroportId;
 
 @Transactional
 @Repository
 public class VilleAeroportDaoJpa implements VilleAeroportDao {
 
-	@PersistenceContext //annotation jpa qui injecte automatiquement l'entity manager
+	@PersistenceContext // annotation jpa qui injecte automatiquement l'entity manager
 	private EntityManager em;
 
-	
 	@Override
-	public VilleAeroport find(Long id) {
+	public VilleAeroport find(VilleAeroportId id) {
 		return em.find(VilleAeroport.class, id);
 	}
-	
 
 	@Override
 	public List<VilleAeroport> findAll() {
-		Query query = em.createQuery("from VilleAeroport v");		
+		Query query = em.createQuery("from VilleAeroport v");
 		return query.getResultList();
 	}
 
 	@Override
 	public void create(VilleAeroport villeAeroport) {
 		em.persist(villeAeroport);
-		
+
 	}
 
 	@Override
@@ -46,14 +45,14 @@ public class VilleAeroportDaoJpa implements VilleAeroportDao {
 	@Override
 	public void delete(VilleAeroport villeAeroport) {
 		em.remove(villeAeroport);
-		
+
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(VilleAeroportId id) {
 		VilleAeroport villeAeroport = find(id);
 		em.remove(villeAeroport);
-	
+
 	}
 
 }
