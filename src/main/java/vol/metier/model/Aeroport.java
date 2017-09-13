@@ -11,8 +11,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
-@Table(name="Aeroports")
+@Table(name = "Aeroports")
 public class Aeroport {
 
 	private long id;
@@ -20,11 +22,12 @@ public class Aeroport {
 	private List<VilleAeroport> villeAeroport;
 	private List<Escale> escales;
 	private int version;
-	
+
 	public Aeroport() {
 	}
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	public long getId() {
 		return id;
 	}
@@ -33,7 +36,8 @@ public class Aeroport {
 		this.id = id;
 	}
 
-	@Column(name="Nom",length=50)
+	@Column(name = "Nom", length = 50)
+	@JsonView(Views.Common.class)
 	public String getNom() {
 		return nom;
 	}
@@ -42,8 +46,7 @@ public class Aeroport {
 		this.nom = nom;
 	}
 
-	
-	@OneToMany(mappedBy="aeroport", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "aeroport", fetch = FetchType.LAZY)
 	public List<VilleAeroport> getVilleAeroport() {
 		return villeAeroport;
 	}
@@ -52,7 +55,7 @@ public class Aeroport {
 		this.villeAeroport = villeAeroport;
 	}
 
-	@OneToMany(mappedBy="aeroport",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "aeroport", fetch = FetchType.LAZY)
 	public List<Escale> getEscales() {
 		return escales;
 	}
@@ -61,10 +64,8 @@ public class Aeroport {
 		this.escales = escales;
 	}
 
-	
-
 	@Version
-	@Column(name="Version")
+	@Column(name = "Version")
 	public int getVersion() {
 		return version;
 	}
@@ -81,8 +82,7 @@ public class Aeroport {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + version;
-		result = prime * result
-				+ ((villeAeroport == null) ? 0 : villeAeroport.hashCode());
+		result = prime * result + ((villeAeroport == null) ? 0 : villeAeroport.hashCode());
 		return result;
 	}
 
@@ -116,9 +116,5 @@ public class Aeroport {
 			return false;
 		return true;
 	}
-
-	
-	
-	
 
 }

@@ -6,21 +6,22 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
-@Table(name="CompagnieAerienneVol")
+@Table(name = "CompagnieAerienneVol")
 public class CompagnieAerienneVol {
 
 	private String numero;
 	private CompagnieAerienneVolId id;
 	private int version;
-	
+
 	public CompagnieAerienneVol() {
 	}
-	
+
 	public CompagnieAerienneVol(CompagnieAerienne compagnieAerienne, Vol vol) {
-		this.id = new CompagnieAerienneVolId(compagnieAerienne,vol);
+		this.id = new CompagnieAerienneVolId(compagnieAerienne, vol);
 	}
-	
 
 	@EmbeddedId
 	public CompagnieAerienneVolId getId() {
@@ -31,9 +32,8 @@ public class CompagnieAerienneVol {
 		this.id = id;
 	}
 
-	
-
-	@Column(name="Numero", length=50)
+	@Column(name = "Numero", length = 50)
+	@JsonView(Views.Common.class)
 	public String getNumero() {
 		return numero;
 	}
@@ -43,7 +43,7 @@ public class CompagnieAerienneVol {
 	}
 
 	@Version
-	@Column(name="Version")
+	@Column(name = "Version")
 	public int getVersion() {
 		return version;
 	}
@@ -51,6 +51,5 @@ public class CompagnieAerienneVol {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
-	
+
 }

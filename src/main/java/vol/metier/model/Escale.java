@@ -13,8 +13,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
-@Table(name="Escale")
+@Table(name = "Escale")
 @IdClass(EscaleId.class)
 public class Escale {
 
@@ -23,23 +25,20 @@ public class Escale {
 	private Aeroport aeroport;
 	private Vol vol;
 	private int version;
-	
+
 	public Escale() {
 	}
-	
-	
 
-	public Escale(Date heureDepart, Date heureArrivee, Aeroport aeroport,Vol vol) {
+	public Escale(Date heureDepart, Date heureArrivee, Aeroport aeroport, Vol vol) {
 		this.heureDepart = heureDepart;
 		this.heureArrivee = heureArrivee;
 		this.aeroport = aeroport;
 		this.vol = vol;
 	}
 
-
-
-	@Column(name="HeureDepart")
+	@Column(name = "HeureDepart")
 	@Temporal(TemporalType.TIME)
+	@JsonView(Views.Common.class)
 	public Date getHeureDepart() {
 		return heureDepart;
 	}
@@ -48,8 +47,9 @@ public class Escale {
 		this.heureDepart = heureDepart;
 	}
 
-	@Column(name="HeureArrivee")
+	@Column(name = "HeureArrivee")
 	@Temporal(TemporalType.TIME)
+	@JsonView(Views.Common.class)
 	public Date getHeureArrivee() {
 		return heureArrivee;
 	}
@@ -58,9 +58,10 @@ public class Escale {
 		this.heureArrivee = heureArrivee;
 	}
 
-	@Id 
+	@Id
 	@ManyToOne
-	@JoinColumn(name="Aeroport_Id")
+	@JoinColumn(name = "Aeroport_Id")
+	@JsonView(Views.Common.class)
 	public Aeroport getAeroport() {
 		return aeroport;
 	}
@@ -71,7 +72,7 @@ public class Escale {
 
 	@Id
 	@ManyToOne
-	@JoinColumn(name="Vol_Id")
+	@JoinColumn(name = "Vol_Id")
 	public Vol getVol() {
 		return vol;
 	}
@@ -81,7 +82,7 @@ public class Escale {
 	}
 
 	@Version
-	@Column(name="Version")
+	@Column(name = "Version")
 	public int getVersion() {
 		return version;
 	}
@@ -90,24 +91,17 @@ public class Escale {
 		this.version = version;
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((aeroport == null) ? 0 : aeroport.hashCode());
-		result = prime * result
-				+ ((heureArrivee == null) ? 0 : heureArrivee.hashCode());
-		result = prime * result
-				+ ((heureDepart == null) ? 0 : heureDepart.hashCode());
+		result = prime * result + ((aeroport == null) ? 0 : aeroport.hashCode());
+		result = prime * result + ((heureArrivee == null) ? 0 : heureArrivee.hashCode());
+		result = prime * result + ((heureDepart == null) ? 0 : heureDepart.hashCode());
 		result = prime * result + version;
 		result = prime * result + ((vol == null) ? 0 : vol.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -143,7 +137,4 @@ public class Escale {
 		return true;
 	}
 
-	
-
-	
 }
