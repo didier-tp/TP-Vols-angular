@@ -18,6 +18,17 @@ public class VilleAeroportId implements Serializable{
 	public void setAeroport(long aeroport) {
 		this.aeroport = aeroport;
 	}
+	
+	
+	/**
+	 * @param ville
+	 * @param aeroport
+	 */
+	public VilleAeroportId(long ville, long aeroport) {
+		super();
+		this.ville = ville;
+		this.aeroport = aeroport;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
