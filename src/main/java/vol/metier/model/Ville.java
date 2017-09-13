@@ -46,6 +46,7 @@ public class Ville {
 	}
 
 	@OneToMany(mappedBy = "ville")
+	
 	public List<VilleAeroport> getVilleAeroport() {
 		return villeAeroport;
 	}
