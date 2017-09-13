@@ -139,7 +139,5 @@ public class Passager {
 			return false;
 		return true;
 	}
-	
-	
 
 }
