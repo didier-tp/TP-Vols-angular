@@ -17,6 +17,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -139,12 +140,19 @@ public abstract class Client {
 
 	@Version
 	@Column(name = "Version")
+	@JsonView(Views.Common.class)
 	public int getVersion() {
 		return version;
 	}
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+	
+	@Transient
+	@JsonView(Views.Common.class)
+	public String getType() {
+		return getClass().getSimpleName();
 	}
 
 	@Override
