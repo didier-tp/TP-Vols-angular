@@ -23,7 +23,7 @@ import vol.metier.model.Vol;
 @Repository
 public class VolDaoJpa implements VolDao {
 
-	@PersistenceContext //annotation jpa qui injecte automatiquement l'entity manager
+	@PersistenceContext // annotation jpa qui injecte automatiquement l'entity manager
 	private EntityManager em;
 
 	@Autowired
@@ -40,7 +40,7 @@ public class VolDaoJpa implements VolDao {
 
 	@Override
 	public List<Vol> findAll() {
-		Query query = em.createQuery("from Vol v");		
+		Query query = em.createQuery("from Vol v");
 		return query.getResultList();
 	}
 
@@ -49,43 +49,44 @@ public class VolDaoJpa implements VolDao {
 		em.persist(vol);
 	}
 
-	//un objet récupéré de la base est déjà managé donc les modif se font automatiquement pas besoin d'update
-	//on utilise update pour merger objet
+	// un objet récupéré de la base est déjà managé donc les modif se font
+	// automatiquement pas besoin d'update
+	// on utilise update pour merger objet
 	@Override
 	public Vol update(Vol vol) {
 		return em.merge(vol);
-		
+
 	}
 
 	@Override
 	public void delete(Vol vol) {
-		for(Reservation resa : vol.getReservations()){
+		for (Reservation resa : vol.getReservations()) {
 			reservationDao.delete(resa);
 		}
-		for(Escale escale : vol.getEscales()){
+		for (Escale escale : vol.getEscales()) {
 			escaleDao.delete(escale);
 		}
-		for(CompagnieAerienneVol compagnieAerienneVol : vol.getCompagniesAerienneVol()){
+		for (CompagnieAerienneVol compagnieAerienneVol : vol.getCompagniesAerienneVol()) {
 			compagnieAerienneVolDao.delete(compagnieAerienneVol);
 		}
 		em.remove(vol);
-		
+
 	}
 
 	@Override
 	public void delete(Long id) {
 		Vol vol = find(id);
-		for(Reservation resa : vol.getReservations()){
+		for (Reservation resa : vol.getReservations()) {
 			reservationDao.delete(resa);
 		}
-		for(Escale escale : vol.getEscales()){
+		for (Escale escale : vol.getEscales()) {
 			escaleDao.delete(escale);
 		}
-		for(CompagnieAerienneVol compagnieAerienneVol : vol.getCompagniesAerienneVol()){
+		for (CompagnieAerienneVol compagnieAerienneVol : vol.getCompagniesAerienneVol()) {
 			compagnieAerienneVolDao.delete(compagnieAerienneVol);
 		}
 		em.remove(vol);
-		
+
 	}
 
 }
