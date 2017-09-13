@@ -67,6 +67,7 @@ public class Aeroport {
 
 	@Version
 	@Column(name = "Version")
+	@JsonView(Views.Aeroport.class)
 	public int getVersion() {
 		return version;
 	}
