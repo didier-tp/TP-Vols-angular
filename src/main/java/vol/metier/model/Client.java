@@ -46,6 +46,7 @@ public abstract class Client {
 
 	@Id
 	@GeneratedValue
+	@JsonView(Views.Common.class)
 	public long getId() {
 		return id;
 	}
