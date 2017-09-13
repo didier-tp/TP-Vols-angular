@@ -37,6 +37,7 @@ public class Login {
 	}
 
 	@Column(name = "Login", length = 50, unique = true)
+	@JsonView(Views.Common.class)
 	public String getLogin() {
 		return login;
 	}
@@ -46,6 +47,7 @@ public class Login {
 	}
 
 	@Column(name = "MotDePasse", length = 50)
+	@JsonView(Views.Common.class)
 	public String getMotDePasse() {
 		return motDePasse;
 	}
@@ -55,6 +57,7 @@ public class Login {
 	}
 
 	@Column(name = "Admin")
+	@JsonView(Views.Common.class)
 	public boolean isAdmin() {
 		return admin;
 	}
@@ -74,6 +77,7 @@ public class Login {
 
 	@Version
 	@Column(name = "Version")
+	@JsonView(Views.Common.class)
 	public int getVersion() {
 		return version;
 	}

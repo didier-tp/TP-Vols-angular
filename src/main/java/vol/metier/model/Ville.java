@@ -56,6 +56,7 @@ public class Ville {
 
 	@Version
 	@Column(name = "Version")
+	@JsonView(Views.Common.class)
 	public int getVersion() {
 		return version;
 	}

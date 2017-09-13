@@ -25,7 +25,7 @@ public class CompagnieAerienne {
 	}
 
 	@Id
-	@GeneratedValue //généré automatiquement
+	@GeneratedValue // gï¿½nï¿½rï¿½ automatiquement
 	@JsonView(Views.Common.class)
 	public long getId() {
 		return id;
@@ -56,6 +56,7 @@ public class CompagnieAerienne {
 
 	@Version
 	@Column(name = "Version")
+	@JsonView(Views.Common.class)
 	public int getVersion() {
 		return version;
 	}
