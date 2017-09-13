@@ -48,6 +48,7 @@ public class Aeroport {
 	}
 
 	@OneToMany(mappedBy = "aeroport", fetch = FetchType.LAZY)
+	@JsonView(Views.Aeroport.class)
 	public List<VilleAeroport> getVilleAeroport() {
 		return villeAeroport;
 	}

@@ -47,7 +47,7 @@ public class AeroportDaoJpa implements AeroportDao {
 
 	@Override
 	public List<Aeroport> findAll() {
-		Query query = em.createQuery("from Aeroport a");		
+		Query query = em.createQuery("from Aeroport a left join fetch a.villeAeroport");		
 		return query.getResultList();
 	}
 
