@@ -2,6 +2,8 @@ package vol.metier.model;
 
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Embeddable
 public class Adresse {
 
@@ -12,7 +14,7 @@ public class Adresse {
 	
 	public Adresse() {
 	}
-
+	@JsonView(Views.Common.class)
 	public String getAdresse() {
 		return adresse;
 	}
@@ -20,7 +22,7 @@ public class Adresse {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-
+	@JsonView(Views.Common.class)
 	public String getCodePostal() {
 		return codePostal;
 	}
@@ -28,7 +30,7 @@ public class Adresse {
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
-
+	@JsonView(Views.Common.class)
 	public String getVille() {
 		return ville;
 	}
@@ -36,7 +38,7 @@ public class Adresse {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
-
+	@JsonView(Views.Common.class)
 	public String getPays() {
 		return pays;
 	}
