@@ -32,4 +32,8 @@ public class Views {
 	public static class Ville extends Common {
 
 	}
+
+	public static class Escale extends Common {
+
+	}
 }

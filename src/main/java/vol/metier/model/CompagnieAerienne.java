@@ -26,6 +26,7 @@ public class CompagnieAerienne {
 
 	@Id
 	@GeneratedValue //généré automatiquement
+	@JsonView(Views.Common.class)
 	public long getId() {
 		return id;
 	}

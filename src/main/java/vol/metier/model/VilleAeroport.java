@@ -9,16 +9,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
-@Table(name="VillesAeroports")
+@Table(name = "VillesAeroports")
 @IdClass(VilleAeroportId.class)
 public class VilleAeroport {
-
 
 	private Ville ville;
 	private Aeroport aeroport;
 	private int version;
-	
+
 	public VilleAeroport() {
 	}
 
@@ -28,39 +29,34 @@ public class VilleAeroport {
 		this.aeroport = aeroport;
 	}
 
-
 	@Version
-	@Column(name="Version")
+	@Column(name = "Version")
+	@JsonView(Views.Common.class)
 	public int getVersion() {
 		return version;
 	}
-
 
 	public void setVersion(int version) {
 		this.version = version;
 	}
 
-
-	@Id 
+	@Id
 	@ManyToOne
-	@JoinColumn(name="Ville_id")
+	@JoinColumn(name = "Ville_id")
 	public Ville getVille() {
 		return ville;
 	}
-
 
 	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
 
-
-	@Id 
+	@Id
 	@ManyToOne
-	@JoinColumn(name="Aeroport_id")
+	@JoinColumn(name = "Aeroport_id")
 	public Aeroport getAeroport() {
 		return aeroport;
 	}
-
 
 	public void setAeroport(Aeroport aeroport) {
 		this.aeroport = aeroport;

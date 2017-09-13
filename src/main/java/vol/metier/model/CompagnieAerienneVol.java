@@ -24,6 +24,7 @@ public class CompagnieAerienneVol {
 	}
 
 	@EmbeddedId
+	@JsonView(Views.Common.class)
 	public CompagnieAerienneVolId getId() {
 		return id;
 	}
