@@ -34,6 +34,7 @@ public class Reservation {
 
 	@Id
 	@GeneratedValue
+	@JsonView(Views.Common.class)
 	public Long getId() {
 
 		return id;
