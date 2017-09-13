@@ -34,7 +34,7 @@ public class Reservation {
 
 	@Id
 	@GeneratedValue
-	public long getId() {
+	public Long getId() {
 
 		return id;
 	}
@@ -56,7 +56,7 @@ public class Reservation {
 
 	@Column(name = "Numero")
 	@JsonView(Views.Common.class)
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
