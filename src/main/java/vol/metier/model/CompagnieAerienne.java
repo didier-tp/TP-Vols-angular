@@ -25,7 +25,7 @@ public class CompagnieAerienne {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue //généré automatiquement
 	public long getId() {
 		return id;
 	}
