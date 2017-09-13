@@ -40,4 +40,8 @@ public class Views {
 	public static class VilleAeroport extends Common {
 
 	}
+	
+	public static class CompagnieAerienneVol extends Common {
+
+	}
 }
