@@ -1,7 +1,5 @@
 package vol.metier.model;
 
-
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,19 +10,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
-@Table(name="CompagnieAerienne")
+@Table(name = "CompagnieAerienne")
 public class CompagnieAerienne {
 
 	private long id;
 	private String nom;
 	private List<CompagnieAerienneVol> compagniesAerienneVol;
 	private int version;
-	
+
 	public CompagnieAerienne() {
 	}
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	public long getId() {
 		return id;
 	}
@@ -33,7 +34,8 @@ public class CompagnieAerienne {
 		this.id = id;
 	}
 
-	@Column(name="Nom", length=50)
+	@Column(name = "Nom", length = 50)
+	@JsonView(Views.Common.class)
 	public String getNom() {
 		return nom;
 	}
@@ -42,18 +44,17 @@ public class CompagnieAerienne {
 		this.nom = nom;
 	}
 
-	@OneToMany(mappedBy="id.compagnieAerienne")
+	@OneToMany(mappedBy = "id.compagnieAerienne")
 	public List<CompagnieAerienneVol> getCompagniesAerienneVol() {
 		return compagniesAerienneVol;
 	}
 
-	public void setCompagniesAerienneVol(
-			List<CompagnieAerienneVol> compagniesAerienneVol) {
+	public void setCompagniesAerienneVol(List<CompagnieAerienneVol> compagniesAerienneVol) {
 		this.compagniesAerienneVol = compagniesAerienneVol;
 	}
 
 	@Version
-	@Column(name="Version")
+	@Column(name = "Version")
 	public int getVersion() {
 		return version;
 	}
@@ -66,10 +67,7 @@ public class CompagnieAerienne {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((compagniesAerienneVol == null) ? 0 : compagniesAerienneVol
-						.hashCode());
+		result = prime * result + ((compagniesAerienneVol == null) ? 0 : compagniesAerienneVol.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + version;
@@ -101,8 +99,5 @@ public class CompagnieAerienne {
 			return false;
 		return true;
 	}
-
-	
-	
 
 }

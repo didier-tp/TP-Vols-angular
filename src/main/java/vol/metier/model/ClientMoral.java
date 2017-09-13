@@ -6,18 +6,21 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @DiscriminatorValue("Moral")
 public class ClientMoral extends Client {
 
 	private TitreMoral titre;
 	private String siret;
-	
+
 	public ClientMoral() {
 	}
-	
-	@Column(name="Titre")
+
+	@Column(name = "Titre")
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.Common.class)
 	public TitreMoral getTitre() {
 		return titre;
 	}
@@ -26,7 +29,8 @@ public class ClientMoral extends Client {
 		this.titre = titre;
 	}
 
-	@Column(name="Siret",length=50)
+	@Column(name = "Siret", length = 50)
+	@JsonView(Views.Common.class)
 	public String getSiret() {
 		return siret;
 	}
@@ -34,7 +38,5 @@ public class ClientMoral extends Client {
 	public void setSiret(String siret) {
 		this.siret = siret;
 	}
-
-	
 
 }

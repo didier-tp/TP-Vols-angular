@@ -10,20 +10,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
-@Table(name="Villes")
+@Table(name = "Villes")
 public class Ville {
 
-	
 	private long id;
 	private String nom;
 	private List<VilleAeroport> villeAeroport;
 	private int version;
-	
+
 	public Ville() {
 	}
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	public long getId() {
 		return id;
 	}
@@ -32,7 +34,8 @@ public class Ville {
 		this.id = id;
 	}
 
-	@Column(name="Nom", length=50)
+	@Column(name = "Nom", length = 50)
+	@JsonView(Views.Common.class)
 	public String getNom() {
 		return nom;
 	}
@@ -40,9 +43,8 @@ public class Ville {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
 
-	@OneToMany(mappedBy="ville")
+	@OneToMany(mappedBy = "ville")
 	public List<VilleAeroport> getVilleAeroport() {
 		return villeAeroport;
 	}
@@ -52,7 +54,7 @@ public class Ville {
 	}
 
 	@Version
-	@Column(name="Version")
+	@Column(name = "Version")
 	public int getVersion() {
 		return version;
 	}
@@ -68,8 +70,7 @@ public class Ville {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + version;
-		result = prime * result
-				+ ((villeAeroport == null) ? 0 : villeAeroport.hashCode());
+		result = prime * result + ((villeAeroport == null) ? 0 : villeAeroport.hashCode());
 		return result;
 	}
 
@@ -98,7 +99,5 @@ public class Ville {
 			return false;
 		return true;
 	}
-	
-	
 
 }

@@ -1,8 +1,6 @@
 package vol.metier.model;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,9 +19,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name= "Client", length=10, discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "Client", length = 10, discriminatorType = DiscriminatorType.STRING)
 public abstract class Client {
 
 	private long id;
@@ -34,22 +34,18 @@ public abstract class Client {
 	private Login login;
 	private Adresse adresse;
 	private List<Reservation> reservations;
-	//private Set<Reservation> reservations = new HashSet<Reservation>();
+	// private Set<Reservation> reservations = new HashSet<Reservation>();
 	private int version;
-	
 
 	public Client() {
 	}
-	
-	
-	
+
 	public Client(String nom) {
 		this.nom = nom;
 	}
 
-
-
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	public long getId() {
 		return id;
 	}
@@ -58,7 +54,8 @@ public abstract class Client {
 		this.id = id;
 	}
 
-	@Column(name="Nom",length=50)
+	@Column(name = "Nom", length = 50)
+	@JsonView(Views.Common.class)
 	public String getNom() {
 		return nom;
 	}
@@ -67,7 +64,8 @@ public abstract class Client {
 		this.nom = nom;
 	}
 
-	@Column(name="NumeroTel")
+	@Column(name = "NumeroTel")
+	@JsonView(Views.Common.class)
 	public int getNumeroTel() {
 		return numeroTel;
 	}
@@ -76,7 +74,8 @@ public abstract class Client {
 		this.numeroTel = numeroTel;
 	}
 
-	@Column(name="NumeroFax")
+	@Column(name = "NumeroFax")
+	@JsonView(Views.Common.class)
 	public int getNumeroFax() {
 		return numeroFax;
 	}
@@ -85,7 +84,8 @@ public abstract class Client {
 		this.numeroFax = numeroFax;
 	}
 
-	@Column(name="Email",length=100)
+	@Column(name = "Email", length = 100)
+	@JsonView(Views.Common.class)
 	public String getEmail() {
 		return email;
 	}
@@ -94,9 +94,8 @@ public abstract class Client {
 		this.email = email;
 	}
 
-
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="Login_Id")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "Login_Id")
 	public Login getLogin() {
 		return login;
 	}
@@ -104,14 +103,13 @@ public abstract class Client {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-	
+
 	@Embedded
-	@AttributeOverrides({
-		@AttributeOverride(name="adresse",column=@Column(name="C_RUE",length=50)),
-		@AttributeOverride(name="codePostal",column=@Column(name="C_CP",length=20)),
-		@AttributeOverride(name="ville",column=@Column(name="C_VILLE",length=50)),
-		@AttributeOverride(name="pays",column=@Column(name="C_PAYS",length=50))
-		})
+	@AttributeOverrides({ @AttributeOverride(name = "adresse", column = @Column(name = "C_RUE", length = 50)),
+			@AttributeOverride(name = "codePostal", column = @Column(name = "C_CP", length = 20)),
+			@AttributeOverride(name = "ville", column = @Column(name = "C_VILLE", length = 50)),
+			@AttributeOverride(name = "pays", column = @Column(name = "C_PAYS", length = 50)) })
+	@JsonView(Views.Common.class)
 	public Adresse getAdresse() {
 		return adresse;
 	}
@@ -119,30 +117,27 @@ public abstract class Client {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-	
-//	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
-//	public Set<Reservation> getReservations() {
-//		return reservations;
-//	}
-//
-//	public void setReservations(Set<Reservation> reservations) {
-//		this.reservations = reservations;
-//	}
-	
-	
+
+	// @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+	// public Set<Reservation> getReservations() {
+	// return reservations;
+	// }
+	//
+	// public void setReservations(Set<Reservation> reservations) {
+	// this.reservations = reservations;
+	// }
+
 	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
 	public List<Reservation> getReservations() {
 		return reservations;
 	}
-
-
 
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
 
 	@Version
-	@Column(name="Version")
+	@Column(name = "Version")
 	public int getVersion() {
 		return version;
 	}
@@ -150,9 +145,6 @@ public abstract class Client {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -165,13 +157,10 @@ public abstract class Client {
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + numeroFax;
 		result = prime * result + numeroTel;
-		result = prime * result
-				+ ((reservations == null) ? 0 : reservations.hashCode());
+		result = prime * result + ((reservations == null) ? 0 : reservations.hashCode());
 		result = prime * result + version;
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -217,8 +206,5 @@ public abstract class Client {
 			return false;
 		return true;
 	}
-
-	
-	
 
 }
