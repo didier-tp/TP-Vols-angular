@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="Vols")
 public class Vol {
@@ -46,6 +48,7 @@ public class Vol {
 
 	@Column(name="DateDepart")
 	@Temporal(TemporalType.DATE)
+	@JsonView(Views.Common.class)
 	public Date getDateDepart() {
 		return dateDepart;
 	}
@@ -56,6 +59,7 @@ public class Vol {
 
 	@Column(name="DateArrivee")
 	@Temporal(TemporalType.DATE)
+	@JsonView(Views.Common.class)
 	public Date getDateArrivee() {
 		return dateArrivee;
 	}
@@ -66,6 +70,7 @@ public class Vol {
 
 	@Column(name="HeureDepart")
 	@Temporal(TemporalType.TIME)
+	@JsonView(Views.Common.class)
 	public Date getHeureDepart() {
 		return heureDepart;
 	}
@@ -76,6 +81,7 @@ public class Vol {
 
 	@Column(name="HeureArrivee")
 	@Temporal(TemporalType.TIME)
+	@JsonView(Views.Common.class)
 	public Date getHeureArrivee() {
 		return heureArrivee;
 	}
@@ -85,6 +91,7 @@ public class Vol {
 	}
 
 	@OneToMany(mappedBy="vol",fetch = FetchType.LAZY)
+	@JsonView(Views.Vol.class)
 	public List<Escale> getEscales() {
 		return escales;
 	}
@@ -95,6 +102,7 @@ public class Vol {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AeroportDep_Id")
+	@JsonView(Views.Common.class)
 	public Aeroport getDepart() {
 		return depart;
 	}
@@ -106,6 +114,7 @@ public class Vol {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AeroportArr_Id")
+	@JsonView(Views.Common.class)
 	public Aeroport getArrivee() {
 		return arrivee;
 	}
@@ -125,6 +134,7 @@ public class Vol {
 	}
 
 	@OneToMany(mappedBy = "vol",fetch = FetchType.LAZY)
+	@JsonView(Views.Vol.class)
 	public List<Reservation> getReservations() {
 		return reservations;
 	}
@@ -134,6 +144,7 @@ public class Vol {
 	}
 	
 	@OneToMany(mappedBy="id.vol",fetch = FetchType.LAZY)
+	@JsonView(Views.Vol.class)
 	public List<CompagnieAerienneVol> getCompagniesAerienneVol() {
 		return compagniesAerienneVol;
 	}
