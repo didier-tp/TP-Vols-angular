@@ -20,9 +20,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "Reservations")
 public class Reservation {
 
-	private long id;
+	private Long id;
 	private Date date;
-	private int numero;
+	private Integer numero;
 	private Passager passager;
 	private Vol vol;
 	private int version;
@@ -35,10 +35,11 @@ public class Reservation {
 	@Id
 	@GeneratedValue
 	public long getId() {
+
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -59,7 +60,7 @@ public class Reservation {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
@@ -156,5 +157,4 @@ public class Reservation {
 			return false;
 		return true;
 	}
-
 }
