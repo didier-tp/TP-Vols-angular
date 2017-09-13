@@ -65,6 +65,7 @@ public class Passager {
 			@AttributeOverride(name = "codePostal", column = @Column(name = "P_CP")),
 			@AttributeOverride(name = "ville", column = @Column(name = "P_VILLE")),
 			@AttributeOverride(name = "pays", column = @Column(name = "P_PAYS")) })
+	@JsonView(Views.Common.class)
 	public Adresse getAdresse() {
 		return adresse;
 	}
